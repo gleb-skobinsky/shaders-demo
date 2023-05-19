@@ -8,9 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.graphics.drawscope.withTransform
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-actual fun Modifier.shaderEffect(): Modifier = composed {
+actual fun Modifier.shaderEffect(shaderOption: ShaderOptions): Modifier = composed {
     val time by produceState(0f) {
         while (true) {
             withInfiniteAnimationFrameMillis {
@@ -19,12 +20,14 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         }
     }
     Modifier.drawWithCache {
-        val shader = RuntimeShader(compositeSksl)
+        val shader = RuntimeShader(shaderOption.toShaderCode())
         val shaderBrush = ShaderBrush(shader)
         shader.setFloatUniform("iResolution", size.width, size.height)
         shader.setFloatUniform("iTime", time)
         onDrawBehind {
-            drawRect(shaderBrush)
+            withTransform({ scale(scaleX = 1f, scaleY = -1f) }) {
+                drawRect(shaderBrush)
+            }
         }
     }
 }

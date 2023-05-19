@@ -9,7 +9,8 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import org.jetbrains.skia.RuntimeEffect
 import org.jetbrains.skia.RuntimeShaderBuilder
 
-actual fun Modifier.shaderEffect(): Modifier = composed {
+
+actual fun Modifier.shaderEffect(shaderOption: ShaderOptions): Modifier = composed {
     val time by produceState(0f) {
         while (true) {
             withInfiniteAnimationFrameMillis {
@@ -18,7 +19,7 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         }
     }
     Modifier.drawWithCache {
-        val effect = RuntimeEffect.makeForShader(sksl3)
+        val effect = RuntimeEffect.makeForShader(shaderOption.toShaderCode())
         val compositeShaderBuilder = RuntimeShaderBuilder(effect)
         compositeShaderBuilder.uniform(
             name = "iResolution",
