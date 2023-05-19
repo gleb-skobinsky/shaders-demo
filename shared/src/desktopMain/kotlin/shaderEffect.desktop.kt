@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.graphics.drawscope.withTransform
 import org.jetbrains.skia.RuntimeEffect
 import org.jetbrains.skia.RuntimeShaderBuilder
 
@@ -17,7 +18,7 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         }
     }
     Modifier.drawWithCache {
-        val effect = RuntimeEffect.makeForShader(compositeSksl)
+        val effect = RuntimeEffect.makeForShader(sksl3)
         val compositeShaderBuilder = RuntimeShaderBuilder(effect)
         compositeShaderBuilder.uniform(
             name = "iResolution",
@@ -30,7 +31,9 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         )
         val shaderBrush = ShaderBrush(compositeShaderBuilder.makeShader())
         onDrawBehind {
-            drawRect(shaderBrush)
+            withTransform({ scale(scaleX = 1f, scaleY = -1f) }) {
+                drawRect(shaderBrush)
+            }
         }
     }
 }
