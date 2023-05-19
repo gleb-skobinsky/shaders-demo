@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,6 +21,7 @@ import org.jetbrains.compose.resources.painterResource
 fun App() {
     MaterialTheme {
         var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
+        val fontFamily = FontFamily(font("quicksand"))
 
         Column(
             Modifier

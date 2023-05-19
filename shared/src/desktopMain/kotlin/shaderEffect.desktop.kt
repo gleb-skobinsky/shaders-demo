@@ -22,8 +22,7 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         compositeShaderBuilder.uniform(
             name = "iResolution",
             value1 = size.width,
-            value2 = size.height,
-            value3 = density
+            value2 = size.height
         )
         compositeShaderBuilder.uniform(
             "iTime",

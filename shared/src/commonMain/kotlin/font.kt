@@ -1,12 +1,14 @@
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.platform.Font
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.resource
 
-val fontFamily = FontFamily(
-    Font(
-        resource = "Quicksand-Bold.ttf",
-        weight = FontWeight.Normal,
-        style = FontStyle.Normal
-    )
-)
+@Composable
+expect fun font(
+    res: String,
+    weight: FontWeight = FontWeight.Normal,
+    style: FontStyle = FontStyle.Normal,
+): Font

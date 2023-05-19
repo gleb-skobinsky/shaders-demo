@@ -2,7 +2,7 @@ import org.intellij.lang.annotations.Language
 
 @Language("GLSL")
 const val compositeSksl = """
-                uniform float3 iResolution;      // Viewport resolution (pixels)
+                uniform float2 iResolution;      // Viewport resolution (pixels)
                 uniform float  iTime;            // Shader playback time (s)
                 
                 const float cloudscale = 1.1;

@@ -21,7 +21,7 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
     Modifier.drawWithCache {
         val shader = RuntimeShader(compositeSksl)
         val shaderBrush = ShaderBrush(shader)
-        shader.setFloatUniform("iResolution", size.width, size.height, density)
+        shader.setFloatUniform("iResolution", size.width, size.height)
         shader.setFloatUniform("iTime", time)
         onDrawBehind {
             drawRoundRect(shaderBrush)
