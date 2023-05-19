@@ -5,6 +5,7 @@ import androidx.compose.ui.window.application
 
 fun main() = application {
     Window(
+        title = "Grocery Store",
         onCloseRequest = ::exitApplication,
         state = WindowState(WindowPlacement.Maximized)
     ) {

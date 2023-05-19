@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.ShaderBrush
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-actual fun Modifier.shaderEffect(viewPort: MutableState<Pair<Float, Float>>): Modifier = composed {
+actual fun Modifier.shaderEffect(): Modifier = composed {
     val time by produceState(0f) {
         while (true) {
             withInfiniteAnimationFrameMillis {
