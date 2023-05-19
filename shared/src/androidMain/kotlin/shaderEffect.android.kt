@@ -24,7 +24,7 @@ actual fun Modifier.shaderEffect(): Modifier = composed {
         shader.setFloatUniform("iResolution", size.width, size.height)
         shader.setFloatUniform("iTime", time)
         onDrawBehind {
-            drawRoundRect(shaderBrush)
+            drawRect(shaderBrush)
         }
     }
 }
