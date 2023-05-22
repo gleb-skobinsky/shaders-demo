@@ -1,6 +1,7 @@
 import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithCache
@@ -18,9 +19,9 @@ actual fun Modifier.shaderEffect(shaderOption: ShaderOptions): Modifier = compos
             }
         }
     }
+    val effect = remember(shaderOption) { RuntimeEffect.makeForShader(shaderOption.toShaderCode()) }
+    val compositeShaderBuilder = remember(effect) { RuntimeShaderBuilder(effect) }
     Modifier.drawWithCache {
-        val effect = RuntimeEffect.makeForShader(shaderOption.toShaderCode())
-        val compositeShaderBuilder = RuntimeShaderBuilder(effect)
         compositeShaderBuilder.uniform(
             name = "iResolution",
             value1 = size.width,
